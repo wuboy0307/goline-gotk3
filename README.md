@@ -7,8 +7,8 @@ Libraries:
 * [gotk3](https://github.com/conformal/gotk3)
 * [Thrift](http://git.apache.org/thrift.git/)
 
-
-Read log and remove settings if you encounder a problem.  
+* Use `xdg-open` to view images/videos/files.
+* Read log and remove settings if you encounder a problem.  
 
 Screenshot
 ----------
