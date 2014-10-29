@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/carylorrk/goline/res/image"
+	"github.com/carylorrk/goline-gotk3/res/image"
 	"github.com/carylorrk/gotk3/gdk"
 	"github.com/carylorrk/gotk3/glib"
 	"github.com/carylorrk/gotk3/gtk"

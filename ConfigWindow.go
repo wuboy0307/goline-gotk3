@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/carylorrk/goline/res/glade"
+	"github.com/carylorrk/goline-gotk3/res/glade"
 	"github.com/carylorrk/gotk3/gtk"
 )
 

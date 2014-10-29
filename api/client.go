@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"git.apache.org/thrift.git/lib/go/thrift"
-	prot "github.com/carylorrk/goline/protocol"
+	prot "github.com/carylorrk/goline-gotk3/protocol"
 )
 
 const (

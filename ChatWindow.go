@@ -1,10 +1,10 @@
 package main
 
 import (
-	"github.com/carylorrk/goline/api"
-	prot "github.com/carylorrk/goline/protocol"
-	"github.com/carylorrk/goline/res/glade"
-	"github.com/carylorrk/goline/res/image"
+	"github.com/carylorrk/goline-gotk3/api"
+	prot "github.com/carylorrk/goline-gotk3/protocol"
+	"github.com/carylorrk/goline-gotk3/res/glade"
+	"github.com/carylorrk/goline-gotk3/res/image"
 	"github.com/carylorrk/gotk3/gdk"
 	"github.com/carylorrk/gotk3/gtk"
 )

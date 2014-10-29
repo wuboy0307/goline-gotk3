@@ -1,7 +1,7 @@
 package api
 
 import (
-	prot "github.com/carylorrk/goline/protocol"
+	prot "github.com/carylorrk/goline-gotk3/protocol"
 	"strconv"
 )
 

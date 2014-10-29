@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/carylorrk/goline/api"
+	"github.com/carylorrk/goline-gotk3/api"
 	"io"
 	"log"
 	"os"

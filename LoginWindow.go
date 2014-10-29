@@ -1,8 +1,8 @@
 package main
 
 import (
-	prot "github.com/carylorrk/goline/protocol"
-	"github.com/carylorrk/goline/res/glade"
+	prot "github.com/carylorrk/goline-gotk3/protocol"
+	"github.com/carylorrk/goline-gotk3/res/glade"
 	"github.com/carylorrk/gotk3/gdk"
 	"github.com/carylorrk/gotk3/gtk"
 )
