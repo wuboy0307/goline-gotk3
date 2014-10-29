@@ -6,9 +6,9 @@ Goline - Line for Linux
 Libraries:
 * [gotk3](https://github.com/conformal/gotk3)
 * [Thrift](http://git.apache.org/thrift.git/)
-
 * Use `xdg-open` to view images/videos/files.
-* Read log and remove settings if you encounder a problem.  
+
+Read log and remove settings if you encounder a problem.  
 
 Screenshot
 ----------
