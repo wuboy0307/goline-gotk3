@@ -3,15 +3,23 @@ Goline - Line for Linux
 
 ![Icon](https://raw.githubusercontent.com/CaryLorrk/goline-gotk3/master/doc/image/icon.png)  
 
-Libraries:
-* [gotk3](https://github.com/conformal/gotk3)
-* [Thrift](http://git.apache.org/thrift.git/)
-* Use `xdg-open` to view images/videos/files.
+####Note
+If you encounter a problem, read log file and try to remove settings and tempfiles.  
 
-Read log and remove settings if you encounder a problem.  
+####Requirement
+* gtk+ >= 3.12
+* xdg-open
 
-Screenshot
-----------
+
+####Install
+* `go get -v -d github.com/carylorrk/goline-gotk3`
+* `cd $GOPATH/src/github.com/conformal/gotk3`
+* `git checkout PATCH_NAME`
+* `git apply PATCH`
+* `go install github.com/carylorrk/goline-gotk3`
+
+
+####Screenshot
 
 ![Login](https://raw.githubusercontent.com/CaryLorrk/goline-gotk3/master/doc/image/login.png)  
 ![Chat](https://raw.githubusercontent.com/CaryLorrk/goline-gotk3/master/doc/image/chat.png)  
