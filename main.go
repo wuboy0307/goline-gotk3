@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/carylorrk/goline-gotk3/res/css"
-	"github.com/carylorrk/gotk3/gtk"
+	"github.com/conformal/gotk3/gtk"
 	"os"
 )
 

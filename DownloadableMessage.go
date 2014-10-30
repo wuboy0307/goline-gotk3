@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/carylorrk/goline-gotk3/res/glade"
-	"github.com/carylorrk/gotk3/gtk"
+	"github.com/conformal/gotk3/gtk"
 )
 
 type DownloadableMessage struct {

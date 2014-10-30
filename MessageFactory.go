@@ -5,7 +5,7 @@ import (
 
 	"github.com/carylorrk/goline-gotk3/api"
 	prot "github.com/carylorrk/goline-gotk3/protocol"
-	"github.com/carylorrk/gotk3/gtk"
+	"github.com/conformal/gotk3/gtk"
 )
 
 type IMessage interface {

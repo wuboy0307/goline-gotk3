@@ -2,9 +2,9 @@ package main
 
 import (
 	"github.com/carylorrk/goline-gotk3/res/image"
-	"github.com/carylorrk/gotk3/gdk"
-	"github.com/carylorrk/gotk3/glib"
-	"github.com/carylorrk/gotk3/gtk"
+	"github.com/conformal/gotk3/gdk"
+	"github.com/conformal/gotk3/glib"
+	"github.com/conformal/gotk3/gtk"
 )
 
 type LineWindow struct {

@@ -3,8 +3,8 @@ package main
 import (
 	"os/exec"
 
-	"github.com/carylorrk/gotk3/glib"
-	"github.com/carylorrk/gotk3/gtk"
+	"github.com/conformal/gotk3/glib"
+	"github.com/conformal/gotk3/gtk"
 )
 
 type PopupMenu struct {
