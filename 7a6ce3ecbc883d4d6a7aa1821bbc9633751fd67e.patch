@@ -1,0 +1,148 @@
+From ea1d936686882b7096dfb16f810716dafa186c11 Mon Sep 17 00:00:00 2001
+From: CaryLorrk <carylorrk@gmail.com>
+Date: Thu, 30 Oct 2014 07:02:45 +0800
+Subject: [PATCH 1/4] add Adjustment.SetValue(value float64)
+ Adjustment.GetUpper() Adjustment.GetPageSize()
+
+---
+ gtk/gtk.go | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+
+diff --git a/gtk/gtk.go b/gtk/gtk.go
+index 53051a5..eabcfed 100644
+--- a/gtk/gtk.go
++++ b/gtk/gtk.go
+@@ -979,6 +979,20 @@ func wrapAdjustment(obj *glib.Object) *Adjustment {
+ 	return &Adjustment{glib.InitiallyUnowned{obj}}
+ }
+ 
++func (v *Adjustment) SetValue(value float64) {
++	C.gtk_adjustment_set_value(v.native(), C.gdouble(value))
++}
++
++func (v *Adjustment) GetUpper() float64 {
++	c := C.gtk_adjustment_get_upper(v.native())
++	return float64(c)
++}
++
++func (v *Adjustment) GetPageSize() float64 {
++	c := C.gtk_adjustment_get_page_size(v.native())
++	return float64(c)
++}
++
+ /*
+  * GtkAlignment
+  */
+-- 
+2.0.4
+
+
+From 97cfca9e8b36ccd996edcdfc1d21363a5aac48fb Mon Sep 17 00:00:00 2001
+From: CaryLorrk <carylorrk@gmail.com>
+Date: Thu, 30 Oct 2014 07:05:36 +0800
+Subject: [PATCH 2/4] add ScrolledWindow.GetVAdjustment()
+
+---
+ gtk/gtk.go | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/gtk/gtk.go b/gtk/gtk.go
+index eabcfed..efc3598 100644
+--- a/gtk/gtk.go
++++ b/gtk/gtk.go
+@@ -5966,6 +5966,18 @@ func ScrolledWindowNew(hadjustment, vadjustment *Adjustment) (*ScrolledWindow, e
+ 	return s, nil
+ }
+ 
++func (v *ScrolledWindow) GetVAdjustment() *Adjustment {
++	c := C.gtk_scrolled_window_get_vadjustment(v.native())
++	if c == nil {
++		return nil
++	}
++	obj := &glib.Object{glib.ToGObject(unsafe.Pointer(c))}
++	a := wrapAdjustment(obj)
++	obj.RefSink()
++	runtime.SetFinalizer(obj, (*glib.Object).Unref)
++	return a
++}
++
+ // SetPolicy() is a wrapper around gtk_scrolled_window_set_policy().
+ func (v *ScrolledWindow) SetPolicy(hScrollbarPolicy, vScrollbarPolicy PolicyType) {
+ 	C.gtk_scrolled_window_set_policy(v.native(),
+-- 
+2.0.4
+
+
+From b7236fc0184901251ae158877cd472d2b187be36 Mon Sep 17 00:00:00 2001
+From: CaryLorrk <carylorrk@gmail.com>
+Date: Thu, 30 Oct 2014 07:24:23 +0800
+Subject: [PATCH 3/4] add PixbufNewFromData(...)
+
+---
+ gdk/gdk.go | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+
+diff --git a/gdk/gdk.go b/gdk/gdk.go
+index 6a16373..633750d 100644
+--- a/gdk/gdk.go
++++ b/gdk/gdk.go
+@@ -684,6 +684,28 @@ func PixbufNewFromFile(filename string) (*Pixbuf, error) {
+ 	return p, nil
+ }
+ 
++func PixbufNewFromData(data []byte, colorspace Colorspace, hasAlpha bool,
++	bitsPerSample, width, height, rowstride int) (*Pixbuf, error) {
++	res := C.gdk_pixbuf_new_from_data(
++		(*C.guchar)((*C.uchar)(&data[0])),
++		C.GdkColorspace(colorspace),
++		gbool(hasAlpha),
++		C.int(bitsPerSample),
++		C.int(width),
++		C.int(height),
++		C.int(rowstride),
++		C.GdkPixbufDestroyNotify(nil),
++		C.gpointer(nil))
++	if res == nil {
++		return nil, nilPtrErr
++	}
++	obj := &glib.Object{glib.ToGObject(unsafe.Pointer(res))}
++	p := &Pixbuf{obj}
++	obj.Ref()
++	runtime.SetFinalizer(obj, (*glib.Object).Unref)
++	return p, nil
++}
++
+ // ScaleSimple is a wrapper around gdk_pixbuf_scale_simple().
+ func (v *Pixbuf) ScaleSimple(destWidth, destHeight int, interpType InterpType) (*Pixbuf, error) {
+ 	c := C.gdk_pixbuf_scale_simple(v.native(), C.int(destWidth),
+-- 
+2.0.4
+
+
+From 92413db5684f381c7df250111a10c82991006314 Mon Sep 17 00:00:00 2001
+From: CaryLorrk <carylorrk@gmail.com>
+Date: Thu, 30 Oct 2014 07:26:39 +0800
+Subject: [PATCH 4/4] add Window.SetIcon(...)
+
+---
+ gtk/gtk.go | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/gtk/gtk.go b/gtk/gtk.go
+index efc3598..a02738c 100644
+--- a/gtk/gtk.go
++++ b/gtk/gtk.go
+@@ -8554,6 +8554,10 @@ func (v *Window) SetTitle(title string) {
+ 	C.gtk_window_set_title(v.native(), (*C.gchar)(cstr))
+ }
+ 
++func (v *Window) SetIcon(pixbuf *gdk.Pixbuf) {
++	C.gtk_window_set_icon(v.native(), (*C.GdkPixbuf)(unsafe.Pointer(pixbuf.Native())))
++}
++
+ // SetResizable is a wrapper around gtk_window_set_resizable().
+ func (v *Window) SetResizable(resizable bool) {
+ 	C.gtk_window_set_resizable(v.native(), gbool(resizable))
+-- 
+2.0.4
+
